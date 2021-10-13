@@ -8,20 +8,21 @@ class LinkContainer extends React.Component {
     super(props)
 
     this.state = {favLinks: [] }
-    /* TODO - Create state object for storing favLinks */
+    //Created a state object to hhold an array called favLinks 
   }
 
   handleRemove = (index) => {
 
     const favLinksdeleted = this.state.favLinks;
-     favLinksdeleted.splice(index, 1);
+    favLinksdeleted.splice(index, 1);
+    //used splice method to remove favLink at index
 
     this.setState({favLinks: favLinksdeleted})
-   
     /*
             TODO - Create logic for setting the state to filter array and remove favLink at index
         */
   }
+
 
   handleSubmit = (favLink) => {
 
@@ -29,13 +30,12 @@ class LinkContainer extends React.Component {
     console.log(...oldData, favLink)
         
     this.setState({favLinks: [...oldData, favLink]})
-
-
-
     /*
-            TODO - Create logic to setState and add new favLink to favLinks array in state
+            Created logic to setState and add new favLink to favLinks array in state
         */
   }
+
+
 
   render() {
     return (
@@ -43,15 +43,14 @@ class LinkContainer extends React.Component {
         <h1>My Favorite Links</h1>
         <p>Add a new url with a name and link to the table.</p>
         
-        
+        {/*passing a prop called linkData and removeLink to Table component*/}
         <Table linkData = {this.state.favLinks} removeLink = {this.handleRemove} />
         
-    
-        {/*TODO - Add Table Component */}
 
         <br />
 
         <h3>Add New</h3>
+        {/* passing handleSubmit as a parameter to the form component*/}
         <Form onNewSubmit = {this.handleSubmit}/>
         {/*TODO - Add Form Component */}
       </div>

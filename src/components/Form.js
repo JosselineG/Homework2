@@ -4,8 +4,9 @@ class Form extends Component {
     constructor(props) {
         super(props)
         
-        this.state = {linkName:"", URL:""};
+        this.state = {name:"", URL:""};
 
+        // This binding makes `this` work in the callback
         this.handleChange = this.handleChange.bind(this)
         this.onFormSubmit = this.onFormSubmit.bind(this)
         /*
@@ -16,10 +17,14 @@ class Form extends Component {
 
     handleChange = event => {
         
-        
-        event.preventDefault(); 
-       this.setState({[event.target.name] : event.target.value})
-   
+       // prevent page reloads form event
+       event.preventDefault(); 
+
+        this.setState({[event.target.name] : event.target.value})
+         // update the state everytime the form changes
+         /* NOTE: [event.target.name] is used to update object properly, this way 
+          I can have multiple react inputs that have a different name prperty 
+          and using the same onChange handler. */
       
         /*
             TODO - Logic for changing state based on form changes
@@ -31,10 +36,9 @@ class Form extends Component {
         // to prevent page reload on form submit
         event.preventDefault();
        
-        this.setState({linkName: "",URL: ""});
-        let newerLink ={linkName: this.state.linkName, URL: this.state.URL};
+        let newerLink = {name: this.state.name, URL: this.state.URL};
         this.props.onNewSubmit(newerLink);
-        
+       // calls the callback function from LinkContainer and sends data from state
         
         
         /*
@@ -47,12 +51,12 @@ class Form extends Component {
 
         return(
             <form>
-                <label htmlFor = 'linkName'> Name:  </label>  
+                <label htmlFor = 'name'> Name:  </label>  
                 <input
                   type = "text" 
-                  name= "linkName"
-                  id = "linkName"
-                  value = {this.state.linkName}
+                  name= "name"
+                  id = "name"
+                  value = {this.state.name}
                   onChange = {this.handleChange}
                 />
                  
